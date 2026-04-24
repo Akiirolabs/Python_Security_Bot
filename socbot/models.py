@@ -19,15 +19,17 @@ class Alert(BaseModel):
     iocs: List[IOC] = Field(default_factory=list)
 
 class EnrichmentResult(BaseModel):
+    vendor: str
     ioc: IOC
     verdict: Verdict
-    severity: Severity
+    confidence: int = Field(ge=0, le=100)
     details: Optional[Dict[str, Any]] = None
 
+
 class Case(BaseModel):
-    alerts: List[Alert] 
-    iocs: List[IOC] 
-    enrichment_results: List[EnrichmentResult] 
-    score: int= Field  (ge=0, le=100)
-    Severity: Severity
-    recommendation: List[str] = Field(default_factory=list) 
+    alerts: List[Alert]
+    iocs: List[IOC]
+    enrichments: List[EnrichmentResult] = Field(default_factory=list)
+    score: int = Field(ge=0, le=100)
+    severity: Severity
+    recommendations: List[str] = Field(default_factory=list)
