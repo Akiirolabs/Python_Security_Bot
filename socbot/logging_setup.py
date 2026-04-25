@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def setup_logging(out_dir: str) -> logging.Logger:
-    path(out_dir).mkdir(parents=True, exist_ok=True)
+    Path(out_dir).mkdir(parents=True, exist_ok=True)
     log_path = Path(out_dir) / "run.log"
 
     logger = logging.getLogger("socbot")
@@ -22,7 +22,6 @@ def setup_logging(out_dir: str) -> logging.Logger:
     logger.addHandler(file_handler)
 
     return logger
-
 
 
 
