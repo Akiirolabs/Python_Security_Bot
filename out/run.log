@@ -1,0 +1,5 @@
+2026-04-25 17:07:59,932 - socbot - INFO - Starting pipeline
+2026-04-25 17:07:59,933 - socbot - INFO - Input=data/alerts.csv Out=out Config=config.yaml
+2026-04-25 17:07:59,934 - socbot - INFO - Loaded 3 alerts from data/alerts.csv
+2026-04-25 17:07:59,935 - socbot - INFO - Extracted 5 unique IOCs
+2026-04-25 17:07:59,937 - socbot - INFO - Wrote out/case.json and out/report.md

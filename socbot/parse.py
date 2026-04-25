@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -10,14 +11,17 @@ from .models import Alert
 def load_alerts(input_path: str) -> list[Alert]:
     p = Path(input_path)
     if not p.exists():
-      raise FileNotFoundError("Input_path")
+        raise FileNotFoundError(input_path)
 
     suffix = p.suffix.lower()
     if suffix == ".csv":
-     df = pd.read_csv(p)
-    return _alerts_from_dataframe(df)
+        df = pd.read_csv(p)
+        return _alerts_from_dataframe(df)
+    if suffix == ".json":
+        rows = json.loads(p.read_text(encoding="utf-8"))
+        return _alerts_from_dataframe(pd.DataFrame(rows))
 
-    raise ValueError(f"Unsupported Input type (use .csv or .json)")
+    raise ValueError("Unsupported input type. Use .csv or .json")
 
 def _alerts_from_dataframe(df: pd.DataFrame) -> list[Alert]:
     required = {"alert_id", "timestamp", "source", "message"}
@@ -28,20 +32,17 @@ def _alerts_from_dataframe(df: pd.DataFrame) -> list[Alert]:
     alerts: list[Alert] = []
     for _, row in df.iterrows():
         alert = Alert(
-            alert_id = str(row["alert_id"]),
-            timestamp = str(row["timestamp"]),
-            source = str(row["source"]),
-            message = str(row["message"]),
-        iocs=[],
-    )
-    ioc_strings = extract_iocs_from_text(alert.message)
-    raw_iocs = extract_iocs_from_text(alert.message)
-    for raw in raw_iocs:
-        ioc = classify_and_build(raw)
-        if ioc:
-            alert.iocs.append(ioc)
-
+            alert_id=str(row["alert_id"]),
+            timestamp=str(row["timestamp"]),
+            source=str(row["source"]),
+            message=str(row["message"]),
+            iocs=[],
+        )
+        raw_iocs = extract_iocs_from_text(alert.message)
+        for raw in raw_iocs:
+            ioc = classify_and_build(raw)
+            if ioc:
+                alert.iocs.append(ioc)
         alerts.append(alert)
 
     return alerts
-

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ipaddress
 import re
+from typing import Optional
 from urllib.parse import urlparse
 
 from .models import IOC
@@ -37,7 +38,7 @@ def normalize_ioc(ioc_type: str, raw: str) -> str:
     return raw
 
 
-def classify_and_build(raw: str) -> IOC | None:
+def classify_and_build(raw: str) -> Optional[IOC]:
     raw = raw.strip()
     if not raw:
         return None

@@ -9,7 +9,7 @@ from .models import Case
 def write_case_json(case: Case, out_dir: str) -> str:
     path = Path(out_dir) /  "case.json" 
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(case.model_dump_json(indent=2)))
+    path.write_text(case.model_dump_json(indent=2), encoding="utf-8")
     return str(path)
 
 
@@ -52,5 +52,5 @@ def write_report_md(case: Case, out_dir: str) -> str:
     for recommendation in case.recommendations:
         lines.append(f"- {recommendation}")
     
-    path.write_text("\n".join(lines)), encoding="utf-8"
+    path.write_text("\n".join(lines), encoding="utf-8")
     return str(path)

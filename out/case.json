@@ -1,0 +1,153 @@
+{
+  "alerts": [
+    {
+      "alert_id": "A-1001",
+      "timestamp": "2026-04-08T10:12:00Z",
+      "source": "EDR",
+      "message": "Suspicious outbound connection to https://evil-example.com/path from host WS-77",
+      "iocs": [
+        {
+          "type": "domain",
+          "value": "evil-example.com",
+          "normalized": "evil-example.com"
+        },
+        {
+          "type": "url",
+          "value": "https://evil-example.com/path",
+          "normalized": "https://evil-example.com/path"
+        }
+      ]
+    },
+    {
+      "alert_id": "A-1002",
+      "timestamp": "2026-04-08T10:20:00Z",
+      "source": "DNS",
+      "message": "Multiple queries for bad-domain.test and 8.8.8.8 observed",
+      "iocs": [
+        {
+          "type": "ip",
+          "value": "8.8.8.8",
+          "normalized": "8.8.8.8"
+        },
+        {
+          "type": "domain",
+          "value": "bad-domain.test",
+          "normalized": "bad-domain.test"
+        }
+      ]
+    },
+    {
+      "alert_id": "A-1003",
+      "timestamp": "2026-04-08T10:35:00Z",
+      "source": "Email",
+      "message": "Attachment hash 44d88612fea8a8f36de82e1278abb02f seen in message",
+      "iocs": [
+        {
+          "type": "hash",
+          "value": "44d88612fea8a8f36de82e1278abb02f",
+          "normalized": "44d88612fea8a8f36de82e1278abb02f"
+        }
+      ]
+    }
+  ],
+  "iocs": [
+    {
+      "type": "domain",
+      "value": "evil-example.com",
+      "normalized": "evil-example.com"
+    },
+    {
+      "type": "url",
+      "value": "https://evil-example.com/path",
+      "normalized": "https://evil-example.com/path"
+    },
+    {
+      "type": "ip",
+      "value": "8.8.8.8",
+      "normalized": "8.8.8.8"
+    },
+    {
+      "type": "domain",
+      "value": "bad-domain.test",
+      "normalized": "bad-domain.test"
+    },
+    {
+      "type": "hash",
+      "value": "44d88612fea8a8f36de82e1278abb02f",
+      "normalized": "44d88612fea8a8f36de82e1278abb02f"
+    }
+  ],
+  "enrichments": [
+    {
+      "vendor": "mock-ti",
+      "ioc": {
+        "type": "domain",
+        "value": "evil-example.com",
+        "normalized": "evil-example.com"
+      },
+      "verdict": "benign",
+      "confidence": 10,
+      "details": {
+        "sha256_prefix": "58a17dd3"
+      }
+    },
+    {
+      "vendor": "mock-ti",
+      "ioc": {
+        "type": "url",
+        "value": "https://evil-example.com/path",
+        "normalized": "https://evil-example.com/path"
+      },
+      "verdict": "malicious",
+      "confidence": 90,
+      "details": {
+        "sha256_prefix": "5eb86260"
+      }
+    },
+    {
+      "vendor": "mock-ti",
+      "ioc": {
+        "type": "ip",
+        "value": "8.8.8.8",
+        "normalized": "8.8.8.8"
+      },
+      "verdict": "unknown",
+      "confidence": 50,
+      "details": {
+        "sha256_prefix": "838c4c25"
+      }
+    },
+    {
+      "vendor": "mock-ti",
+      "ioc": {
+        "type": "domain",
+        "value": "bad-domain.test",
+        "normalized": "bad-domain.test"
+      },
+      "verdict": "unknown",
+      "confidence": 50,
+      "details": {
+        "sha256_prefix": "8753146f"
+      }
+    },
+    {
+      "vendor": "mock-ti",
+      "ioc": {
+        "type": "hash",
+        "value": "44d88612fea8a8f36de82e1278abb02f",
+        "normalized": "44d88612fea8a8f36de82e1278abb02f"
+      },
+      "verdict": "unknown",
+      "confidence": 50,
+      "details": {
+        "sha256_prefix": "1f2b9e9e"
+      }
+    }
+  ],
+  "score": 85,
+  "severity": "critical",
+  "recommendations": [
+    "Escalate immediately to the incident response team.",
+    "Contain affected hosts and block confirmed indicators."
+  ]
+}

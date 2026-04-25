@@ -8,7 +8,7 @@ from typing import Any, Optional
 
 class DiskTTLCache:
     def __init__(self, cache_dir: str, ttl_seconds: int):
-        self.PATH = Path(Path)
+        self.PATH = Path(cache_dir) / "cache.json"
         self.ttl = int(ttl_seconds)
         self._data: dict[str, dict[str, Any]] = {}
         self._load()

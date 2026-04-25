@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from typing import Mapping, Optional, Sequence
 
 from .models import EnrichmentResult, Severity, Verdict
 
@@ -15,7 +15,7 @@ BAD_VERDICTS: set[Verdict] = {"malicious"}
 
 def compute_score(
     enrichment_results: Sequence[EnrichmentResult],
-    risk_weights: Mapping[Verdict, int] | None = None,
+    risk_weights: Optional[Mapping[Verdict, int]] = None,
 ) -> int:
     """Compute a case risk score from enrichment results.
 
@@ -45,6 +45,26 @@ def severity_from_score(score: int) -> Severity:
     if score >= 30:
         return "medium"
     return "low"
+
+
+def recommendation_from_severity(severity: Severity) -> list[str]:
+    recommendations = {
+        "critical": [
+            "Escalate immediately to the incident response team.",
+            "Contain affected hosts and block confirmed indicators.",
+        ],
+        "high": [
+            "Prioritize analyst review.",
+            "Block malicious indicators and investigate affected assets.",
+        ],
+        "medium": [
+            "Review supporting evidence and monitor for related activity.",
+        ],
+        "low": [
+            "No immediate action required beyond routine monitoring.",
+        ],
+    }
+    return recommendations[severity]
 
 
 def _clamp_score(score: int) -> int:
