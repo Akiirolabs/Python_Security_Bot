@@ -1,0 +1,8 @@
+[Unit]
+Description=SOC automation bot
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/path/to/soc-automation-bot
+ExecStart=/path/to/soc-automation-bot/.venv/bin/python -m socbot.cli run --input data/alerts.csv --output out --config config.yaml

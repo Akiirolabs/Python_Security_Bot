@@ -1,0 +1,10 @@
+[Unit]
+Description=Run SOC automation bot every 15 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+Unit=socbot.service
+
+[Install]
+WantedBy=timers.target

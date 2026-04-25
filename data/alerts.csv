@@ -1,0 +1,4 @@
+alert_id,timestamp,source,message
+A-1001,2026-04-08T10:12:00Z,EDR,Suspicious outbound connection to https://evil-example.com/path from host WS-77
+A-1002,2026-04-08T10:20:00Z,DNS,Multiple queries for bad-domain.test and 8.8.8.8 observed
+A-1003,2026-04-08T10:35:00Z,Email,Attachment hash 44d88612fea8a8f36de82e1278abb02f seen in message
