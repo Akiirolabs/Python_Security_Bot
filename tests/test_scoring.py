@@ -19,4 +19,4 @@ def test_scoring_and_severity():
 
     score = compute_score(enrichments, weights)
     assert 30 <= score <= 100
-    assert severity_from_score(score) in ("Medium", "High", "Critical")
+    assert severity_from_score(score) in ("medium", "high", "critical")

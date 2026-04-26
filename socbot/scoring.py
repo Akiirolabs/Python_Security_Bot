@@ -7,10 +7,11 @@ from .models import EnrichmentResult, Severity, Verdict
 DEFAULT_RISK_WEIGHTS: dict[Verdict, int] = {
     "benign": 0,
     "unknown": 20,
+    "suspicious": 50,
     "malicious": 80,
 }
 
-BAD_VERDICTS: set[Verdict] = {"malicious"}
+BAD_VERDICTS: set[Verdict] = {"malicious", "suspicious"}
 
 
 def compute_score(

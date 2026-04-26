@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional, Literal
 from pydantic import BaseModel, Field
 
 IOCType = Literal["ip", "domain", "url", "hash"]
-Verdict = Literal["malicious", "benign", "unknown"]
+Verdict = Literal["malicious", "suspicious", "benign", "unknown"]
 Severity = Literal["low", "medium", "high", "critical"]
 
 class IOC(BaseModel):
